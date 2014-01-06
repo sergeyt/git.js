@@ -1,33 +1,36 @@
 {
-	"name": "git.js",
-	"version": "0.0.0",
-	"description": "Simple api to run git commands from nodejs",
-	"author": "Sergey Todyshev <stodyshev@gmail.com>",
-	"main": "index.js",
-	"repository": {
-		"type": "git",
-		"url": "git@github.com:sergeyt/git.js.git"
-	},
-	"keywords": ["git", "nodejs"],
-	"contributors": [
-		"Sergey Todyshev <stodyshev@gmail.com>"
-	],
-	"dependencies": {
-		"coffee-script": "~1.6.3",
-		"q": "~1.0.0",
-		"lodash": "~2.4.1"
-	},
-	"devDependencies": {
-		"grunt": "~0.4.1",
-		"grunt-contrib-jshint": "~0.7.1",
-		"grunt-coffeelint": "0.0.8",
-		"grunt-npm": "~0.0.2",
-		"grunt-bump": "~0.0.7",
-		"grunt-auto-release": "~0.0.2",
-		"grunt-cli": "~0.1.11"
-	},
-	"scripts": {
-		"lint": "grunt lint",
-		"test": "grunt test"
-	}
+  "name": "git.js",
+  "version": "0.0.1",
+  "description": "Simple api to run git commands from nodejs",
+  "author": "Sergey Todyshev <stodyshev@gmail.com>",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sergeyt/git.js.git"
+  },
+  "keywords": [
+    "git",
+    "nodejs"
+  ],
+  "contributors": [
+    "Sergey Todyshev <stodyshev@gmail.com>"
+  ],
+  "dependencies": {
+    "coffee-script": "~1.6.3",
+    "q": "~1.0.0",
+    "lodash": "~2.4.1"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.7.1",
+    "grunt-coffeelint": "0.0.8",
+    "grunt-npm": "~0.0.2",
+    "grunt-bump": "~0.0.7",
+    "grunt-auto-release": "~0.0.2",
+    "grunt-cli": "~0.1.11"
+  },
+  "scripts": {
+    "lint": "grunt lint",
+    "test": "grunt test"
+  }
 }
