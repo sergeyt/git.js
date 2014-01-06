@@ -18,7 +18,7 @@ First you need to call ```require('git')``` to start using git.js API as in exam
 var git = require('git');
 ```
 
-Next you could call any of the following functions:
+Next you could call any of the following functions.
 
 ### log command
 
@@ -64,6 +64,10 @@ git.diff(files).then(function(files){
 	});
 });
 ```
+
+### other functions
+
+All undocumented functions could be found in the source code.
 
 ## TODO
 
