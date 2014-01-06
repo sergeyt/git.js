@@ -5,23 +5,36 @@ module.exports = (git) ->
 	return (opts) ->
 		opts = {} if not opts
 		cmd = 'status'
-		cmd += '-s' if opts.short
+		cmd += ' -s' if not opts.full
 		git.run(cmd).then parser(opts)
 
 parser = (opts) ->
-	return parseShort if opts.short
-	return parseNormal
+	return parseNormal if opts.full
+	return parseShort
 
+# parser of output in short format
 parseShort = (out) ->
 	lines = out.split '\n'
-	lines = lines.filter (l) ->
-		status = l.substr(0, 2).trim()
-		status != 'D'
 	lines.map (l) ->
-		parts = l.trim().split ' '
-		# todo unified status
-		return {status: parts[0], file: parts[1]}
+		status = l.substr(0, 2)
+		file = l.substr(2).trim()
+		return {
+			status: fullStatus(status)
+			file: file
+		}
 
+fullStatus = (s) ->
+	switch s.trim()
+		when 'M' then 'modified'
+		when 'A' then 'new'
+		when 'AM' then 'new'
+		when 'D' then 'deleted'
+		when 'R' then 'renamed'
+		when 'C' then 'copied'
+		when 'U' then 'updated'
+		else return ''
+
+# normal output parser
 parseNormal = (out) ->
 	lines = out.split '\n'
 	lines = lines.map (l) -> trimStart(l, '#').trim()
@@ -29,10 +42,11 @@ parseNormal = (out) ->
 	statuses = [
 		['new file:', 'new'],
 		['modified:', 'modified'],
-		['removed:', 'removed'],
+		['removed:', 'deleted'],
+		['deleted:', 'deleted']
 	]
 
-	# todo add untracked files
+	# todo support untracked files
 
 	files = lines.map (l) ->
 		st = _.find statuses, (s)-> startsWith l, s[0]
