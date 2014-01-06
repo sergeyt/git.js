@@ -3,7 +3,7 @@ fs = require 'fs'
 Q = require 'q'
 
 # load command plugins
-plugins = ['status', 'diff'].map (name) ->
+plugins = ['status', 'diff', 'log'].map (name) ->
 	fn = require "./#{name}"
 	fn.cmd = name
 	return fn

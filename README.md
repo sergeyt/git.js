@@ -20,9 +20,25 @@ var git = require('git');
 
 Next you could call any of the following functions:
 
+### log command
+
+Use log command to fetch array of commits. Example:
+
+```javascript
+git.log().then(function(commits){
+	commits.forEach(function(commit){
+		console.log(commit.id); // sha-hash
+		console.log(commit.author.name);
+		console.log(commit.author.email);
+		console.log(commit.date);
+		console.log(commit.message);
+	});
+});
+```
+
 ### status command
 
-status command returns array of changed files to be committed to git database. Example:
+Use status command to fetch array of changed files to be committed to git database. Example:
 
 ```javascript
 git.status().then(function(files){
@@ -35,7 +51,7 @@ git.status().then(function(files){
 
 ### diff command
 
-diff command returns array of diffs for given files. Example:
+Use diff command to fetch diffs for given files. Example:
 
 ```javascript
 var files = []; // list of file pathes to get diffs for, all changed files when this list is empty or omitted
