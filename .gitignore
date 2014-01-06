@@ -1,0 +1,4 @@
+.coverage
+.vagrant
+npm-debug.log
+node_modules
