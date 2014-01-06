@@ -27,13 +27,13 @@ module.exports = (grunt) ->
 					module: true,
 					require: true
 			all:
-				src: ['*.js']
+				src: ['*.js', 'test/*.js']
 
 		coffeelint:
 			options:
 				no_tabs: {level: 'ignore'}
 				indentation: {level: 'ignore'}
-			dev: ['*.coffee', 'lib/**/*.coffee']
+			dev: ['*.coffee', 'lib/*.coffee', 'test/*.coffee']
 
 	grunt.loadNpmTasks 'grunt-contrib-jshint'
 	grunt.loadNpmTasks 'grunt-coffeelint'

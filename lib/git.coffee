@@ -2,6 +2,8 @@ fs = require 'fs'
 {spawn} = require 'child_process'
 Q = require 'q'
 
+verbose = false
+
 # load command plugins
 plugins = ['status', 'diff', 'log'].map (name) ->
 	fn = require "./#{name}"
@@ -27,7 +29,10 @@ exec = (cwd, cmd, args) ->
 
 	def = Q.defer()
 
-	git = spawn "git", [cmd, args...], opts
+	argv = [cmd, args...]
+	if verbose
+		console.log "git #{argv.join(' ')}"
+	git = spawn "git", argv, opts
 
 	git.stdout.on 'data', (data) ->
 		msg = data?.toString().trim()
