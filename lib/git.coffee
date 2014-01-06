@@ -1,6 +1,5 @@
 fs = require 'fs'
-path = require 'path'
-{exec} = require 'child_process'
+{spawn} = require 'child_process'
 Q = require 'q'
 
 # load command plugins
@@ -9,40 +8,51 @@ plugins = ['status'].map (name) ->
 	fn.cmd = name
 	return fn
 
-# executes given command
-execute = (cmd) ->
+# executes given git command
+exec = (cwd, cmd, args) ->
+	args = [] if not args
+
 	# todo allow to configure exec options
 	opts =
 		encoding: 'utf8'
 		timeout: 1000 * 60
 		killSignal: 'SIGKILL'
 		maxBuffer: 1024 * 1024
+		cwd: cwd
+		env: process.env
+
+  # inherit process identity
+	opts.uid = process.getuid() if process.getuid
+	opts.gid = process.getgid() if process.getgid
+
 	def = Q.defer()
-	exec cmd, opts, (err, stdout) ->
-		return def.reject (err.toString())?.trim() if err
-		return def.resolve (stdout.toString())?.trim()
+
+	git = spawn "git", [cmd, args...], opts
+
+	git.stdout.on 'data', (data) ->
+		msg = data?.toString().trim()
+		def.resolve msg
+
+	git.stderr.on 'data', (data) ->
+		msg = data?.toString().trim()
+		console.error data
+		def.reject msg
+
+	git.on 'error', (err) ->
+		msg = err?.toString().trim()
+		console.error msg
+		def.reject msg
+
 	return def.promise
 
-# resolves git binary
-bin = ->
-	isWin = process.platform.toLowerCase().match /mswin(?!ce)|mingw|bccwin|win32/
-	return 'git' if isWin
-	return '/usr/bin/env git'
-
 # creates git command runner
-git = (dir, opts) ->
+git = (dir) ->
 
 	if not fs.existsSync dir
 		throw new Error "#{dir} does not exist"
 
-	if path.basename dir != '.git'
-		dir2 = path.join dir, '.git'
-		if not fs.existsSync dir
-			throw new Error "unable to resolve git repository in #{dir}"
-		dir = dir2
-
-	# runs git command
-	run = (command) -> execute "#{bin()} --git-dir \"#{dir}\" #{command}"
+	# runs given command
+	run = (cmd, args) -> exec dir, cmd, args
 
 	api = {run: run}
 

@@ -4,9 +4,8 @@ _ = require 'lodash'
 module.exports = (git) ->
 	return (opts) ->
 		opts = {} if not opts
-		cmd = 'status'
-		cmd += ' -s' if not opts.full
-		git.run(cmd).then parser(opts)
+		args = if opts.full then [] else ['-s']
+		git.run('status', args).then parser(opts)
 
 parser = (opts) ->
 	return parseNormal if opts.full
