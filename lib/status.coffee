@@ -18,10 +18,10 @@ parseShort = (out) ->
 	lines = _.str.lines out
 	lines.map (l) ->
 		status = l.substr(0, 2)
-		file = l.substr(2).trim()
+		path = l.substr(2).trim()
 		return {
-			status: fullStatus(status)
-			file: file
+		path: path
+		status: fullStatus(status)
 		}
 
 fullStatus = (s) ->
@@ -33,14 +33,16 @@ fullStatus = (s) ->
 		when 'R' then 'renamed'
 		when 'C' then 'copied'
 		when 'U' then 'updated'
-		else return ''
+		else
+			return ''
 
 # normal output parser
 parseNormal = (out) ->
 	return [] if not out
 
 	lines = _.str.lines out
-	lines = lines.map (l) -> _.str.ltrim(l, '#').trim()
+	lines = lines.map (l) ->
+		_.str.ltrim(l, '#').trim()
 
 	statuses = [
 		['new file:', 'new'],
@@ -52,10 +54,11 @@ parseNormal = (out) ->
 	# todo support untracked files
 
 	files = lines.map (l) ->
-		st = _.find statuses, (s) -> _.str(l).startsWith(s[0])
+		st = _.find statuses, (s) ->
+			_.str(l).startsWith(s[0])
 		if st
-			file = l.substr(st[0].length).trim()
-			return {file: file, status: st[1]}
+			path = l.substr(st[0].length).trim()
+			return {path: path, status: st[1]}
 		return null
 
 	return files.filter (f) -> f?
