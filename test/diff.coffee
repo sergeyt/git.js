@@ -1,6 +1,6 @@
 git = require '../index'
 
-git(__dirname + '/..').status()
+git(__dirname + '/..').diff()
 .then (files) ->
 		console.log JSON.stringify files, null, 2
 .fail (err) ->

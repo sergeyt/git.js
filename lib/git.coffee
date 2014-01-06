@@ -3,7 +3,7 @@ fs = require 'fs'
 Q = require 'q'
 
 # load command plugins
-plugins = ['status'].map (name) ->
+plugins = ['status', 'diff'].map (name) ->
 	fn = require "./#{name}"
 	fn.cmd = name
 	return fn
@@ -21,7 +21,7 @@ exec = (cwd, cmd, args) ->
 		cwd: cwd
 		env: process.env
 
-  # inherit process identity
+	# inherit process identity
 	opts.uid = process.getuid() if process.getuid
 	opts.gid = process.getgid() if process.getgid
 
@@ -50,12 +50,12 @@ exec = (cwd, cmd, args) ->
 
 # creates git command runner
 git = (dir) ->
-
 	if not fs.existsSync dir
 		throw new Error "#{dir} does not exist"
 
 	# runs given command
-	run = (cmd, args) -> exec dir, cmd, args
+	run = (cmd, args) ->
+		exec dir, cmd, args
 
 	api = {run: run}
 
