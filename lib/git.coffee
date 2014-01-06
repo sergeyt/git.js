@@ -43,6 +43,9 @@ exec = (cwd, cmd, args) ->
 		console.error msg
 		def.reject msg
 
+	git.on 'close', ->
+		def.resolve '' if def.promise.isPending()
+
 	return def.promise
 
 # creates git command runner

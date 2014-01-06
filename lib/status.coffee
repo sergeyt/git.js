@@ -13,6 +13,7 @@ parser = (opts) ->
 
 # parser of output in short format
 parseShort = (out) ->
+	return [] if not out
 	lines = out.split '\n'
 	lines.map (l) ->
 		status = l.substr(0, 2)
@@ -35,6 +36,8 @@ fullStatus = (s) ->
 
 # normal output parser
 parseNormal = (out) ->
+	return [] if not out
+
 	lines = out.split '\n'
 	lines = lines.map (l) -> trimStart(l, '#').trim()
 
