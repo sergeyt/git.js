@@ -1,4 +1,5 @@
-_ = require 'lodash'
+_ = require 'underscore'
+_.str = require 'underscore.string'
 
 # status command plugin
 module.exports = (git) ->
@@ -14,7 +15,7 @@ parser = (opts) ->
 # parser of output in short format
 parseShort = (out) ->
 	return [] if not out
-	lines = out.split '\n'
+	lines = _.str.lines out
 	lines.map (l) ->
 		status = l.substr(0, 2)
 		file = l.substr(2).trim()
@@ -38,8 +39,8 @@ fullStatus = (s) ->
 parseNormal = (out) ->
 	return [] if not out
 
-	lines = out.split '\n'
-	lines = lines.map (l) -> trimStart(l, '#').trim()
+	lines = _.str.lines out
+	lines = lines.map (l) -> _.str.ltrim(l, '#').trim()
 
 	statuses = [
 		['new file:', 'new'],
@@ -51,20 +52,10 @@ parseNormal = (out) ->
 	# todo support untracked files
 
 	files = lines.map (l) ->
-		st = _.find statuses, (s)-> startsWith l, s[0]
+		st = _.find statuses, (s) -> _.str(l).startsWith(s[0])
 		if st
 			file = l.substr(st[0].length).trim()
 			return {file: file, status: st[1]}
 		return null
 
 	return files.filter (f) -> f?
-
-# string utils
-startsWith = (s, prefix) ->
-	r = new RegExp("^" + prefix + ".*$", "g")
-	return r.test s
-
-trimStart = (s, prefix) ->
-	p = s.substr(0, prefix.length)
-	return s.substr(prefix.length) if p == prefix
-	return s

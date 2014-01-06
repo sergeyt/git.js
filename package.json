@@ -18,7 +18,8 @@
   "dependencies": {
     "coffee-script": "~1.6.3",
     "q": "~1.0.0",
-    "lodash": "~2.4.1"
+    "underscore": "~1.5.2",
+    "underscore.string": "~2.3.3"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
