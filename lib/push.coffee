@@ -3,10 +3,9 @@ _.str = require 'underscore.string'
 
 # push command plugin
 module.exports = (git) ->
-	push = (opts) ->
+	return (opts) ->
 		args = ['--porcelain', transform(opts)...]
 		git.run('push', args).then(parse)
-	return push
 
 transform = (opts) ->
 	return [] if not opts

@@ -4,11 +4,10 @@ parse = require('../parse/status').short
 
 # commit command plugin
 module.exports = (git) ->
-	commit = (opts) ->
+	return (opts) ->
 		files = opts.files || []
 		args = ['--short', transform(opts)..., files...]
 		git.run('commit', args).then(parse)
-	return commit
 
 transform = (opts) ->
 	return [] if not opts

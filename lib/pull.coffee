@@ -1,9 +1,8 @@
 # pull command plugin
 module.exports = (git) ->
-	pull = (opts) ->
+	return (opts) ->
 		args = ['--quiet', transform(opts)...]
 		git.run('pull', args)
-	return pull
 
 transform = (opts) ->
 	return [] if not opts

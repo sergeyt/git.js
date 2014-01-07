@@ -6,11 +6,10 @@ async = require 'async'
 
 # log command plugin
 module.exports = (git) ->
-	log = (opts) ->
+	return (opts) ->
 		format = '--format=%H;%an;%ae;%ad;%s'
 		args = [format, '--date=iso', transform(opts)...]
 		git.run('log', args).then(parse).then(extend(git))
-	return log
 
 transform = (opts) ->
 	return [] if not opts
