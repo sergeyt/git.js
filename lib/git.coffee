@@ -14,9 +14,9 @@ plugins = fs.readdirSync(__dirname)
 			else true
 	.map (file) ->
 		name = path.basename(file, '.coffee')
-		fn = require "./#{name}"
-		fn.cmd = name
-		return fn
+		factory = require "./#{name}"
+		factory.cmdname = name
+		return factory
 
 # executes given git command
 exec = (cwd, cmd, args) ->
@@ -73,8 +73,12 @@ git = (dir) ->
 	api = {run: run}
 
 	# inject commands
-	plugins.forEach (p) ->
-		api[p.cmd] = p api
+	plugins.forEach (factory) ->
+		fn = factory api
+		api[factory.cmdname] = fn
+		if factory.aliases?
+			factory.aliases.forEach (name) ->
+				api[name] = fn
 
 	return api
 
