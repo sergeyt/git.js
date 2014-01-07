@@ -1,14 +1,22 @@
 fs = require 'fs'
+path = require 'path'
 {spawn} = require 'child_process'
 Q = require 'q'
 
 verbose = false
 
 # load command plugins
-plugins = ['status', 'diff', 'log'].map (name) ->
-	fn = require "./#{name}"
-	fn.cmd = name
-	return fn
+plugins = fs.readdirSync(__dirname)
+	.filter (file) ->
+		name = path.basename(file, '.coffee')
+		switch name
+			when 'git' then false
+			else true
+	.map (file) ->
+		name = path.basename(file, '.coffee')
+		fn = require "./#{name}"
+		fn.cmd = name
+		return fn
 
 # executes given git command
 exec = (cwd, cmd, args) ->

@@ -12,7 +12,7 @@ module.exports = (git) ->
 		git.run('log', args).then(parse).then(extend(git))
 	return log
 
-transform = (opts)->
+transform = (opts) ->
 	return [] if not opts
 	# todo support more options like since, after, etc
 	_.keys(opts)
@@ -24,6 +24,7 @@ transform = (opts)->
 	.filter _.identity
 
 parse = (out) ->
+	return [] if not out
 	lines = _.str.lines(out)
 	lines.map (l) ->
 		p = l.split ';'

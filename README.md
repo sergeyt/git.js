@@ -15,7 +15,8 @@
 First you need to call ```require('git')``` to start using git.js API as in example below:
 
 ```javascript
-var git = require('git');
+var dir = __dirname; // dir with .git repository
+var git = require('git')(dir);
 ```
 
 Next you could call any of the following functions.
