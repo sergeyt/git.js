@@ -1,6 +1,5 @@
 _ = require 'underscore'
 _.str = require 'underscore.string'
-parseDiff = require 'parse-diff'
 Q = require 'q'
 async = require 'async'
 
@@ -44,7 +43,7 @@ extend = (git) ->
 
 # fetch diff for given commit
 diff = (git, commit) ->
-	git.run('diff', ['-u', commit.id]).then(parseDiff)
+	git.diff([commit.id])
 
 # fetch diffs for given commits
 diffs = (git, commits) ->
