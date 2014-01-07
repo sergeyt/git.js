@@ -20,7 +20,7 @@
     "q": "~1.0.0",
     "underscore": "~1.5.2",
     "underscore.string": "~2.3.3",
-    "parse-diff": "0.0.5",
+    "parse-diff": "0.0.6",
     "async": "~0.2.9"
   },
   "devDependencies": {
