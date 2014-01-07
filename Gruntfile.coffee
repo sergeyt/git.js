@@ -41,8 +41,15 @@ module.exports = (grunt) ->
 				'play/*.coffee'
 			]
 
+		simplemocha:
+			options:
+				ui: 'bdd'
+				reporter: 'spec'
+			all: src: ['test/*.coffee']
+
 	grunt.loadNpmTasks 'grunt-contrib-jshint'
 	grunt.loadNpmTasks 'grunt-coffeelint'
+	grunt.loadNpmTasks 'grunt-simple-mocha'
 	grunt.loadNpmTasks 'grunt-npm'
 	grunt.loadNpmTasks 'grunt-bump'
 	grunt.loadNpmTasks 'grunt-auto-release'
@@ -55,5 +62,5 @@ module.exports = (grunt) ->
 		]
 
 	grunt.registerTask 'lint', ['coffeelint', 'jshint']
-	grunt.registerTask 'test', ['lint']
+	grunt.registerTask 'test', ['lint', 'simplemocha']
 	grunt.registerTask 'default', ['test']
