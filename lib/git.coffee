@@ -74,11 +74,10 @@ git = (dir) ->
 
 	# inject commands
 	plugins.forEach (factory) ->
-		fn = factory api
-		api[factory.cmdname] = fn
-		if factory.aliases?
-			factory.aliases.forEach (name) ->
-				api[name] = fn
+		cmdfn = factory api
+		api[factory.cmdname] = cmdfn
+		(cmdfn.aliases || []).forEach (name) ->
+			api[name] = cmdfn
 
 	return api
 
