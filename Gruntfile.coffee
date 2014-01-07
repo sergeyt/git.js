@@ -33,7 +33,13 @@ module.exports = (grunt) ->
 			options:
 				no_tabs: {level: 'ignore'}
 				indentation: {level: 'ignore'}
-			dev: ['*.coffee', 'lib/*.coffee', 'parse/*.coffee', 'test/*.coffee']
+			dev: [
+				'*.coffee',
+				'lib/*.coffee',
+				'parse/*.coffee',
+				'test/*.coffee',
+				'play/*.coffee'
+			]
 
 	grunt.loadNpmTasks 'grunt-contrib-jshint'
 	grunt.loadNpmTasks 'grunt-coffeelint'
