@@ -6,7 +6,7 @@ async = require 'async'
 # log command plugin
 module.exports = (git) ->
 	return (opts) ->
-		format = '--format=%H;%an;%ae;%ad;%s'
+		format = '--format=%H;%P;%an;%ae;%ad;%s'
 		args = [format, '--date=iso', transform(opts)...]
 		git.run('log', args).then(parse).then(extend(git))
 
@@ -27,11 +27,12 @@ parse = (out) ->
 	lines.map (l) ->
 		p = l.split ';'
 		id: p[0]
+		parent: p[1]
 		author:
-			name: p[1]
-			email: p[2]
-		date: new Date(p[3])
-		message: p[4]
+			name: p[2]
+			email: p[3]
+		date: new Date(p[4])
+		message: p[5]
 
 extend = (git) ->
 	(commits) ->
@@ -43,7 +44,7 @@ extend = (git) ->
 
 # fetch diff for given commit
 diff = (git, commit) ->
-	git.diff([commit.id])
+	git.show.diff(commit.id)
 
 # fetch diffs for given commits
 diffs = (git, commits) ->
