@@ -1,13 +1,12 @@
 _ = require 'underscore'
 _.str = require 'underscore.string'
-parse = require('../parse/status').short
 
 # commit command plugin
 module.exports = (git) ->
 	return (opts) ->
 		files = opts.files || []
-		args = ['--short', transform(opts)..., files...]
-		git.run('commit', args).then(parse)
+		args = [transform(opts)..., files...]
+		git.run('commit', args)
 
 transform = (opts) ->
 	return [] if not opts
@@ -18,7 +17,7 @@ transform = (opts) ->
 			switch k
 				# do not create a commit, but show a list of paths that are to be committed.
 				when 'dryrun' then "--dry-run"
-				when 'all' then "--all"
-				when 'message' then "--message=#{_.str.quote(v)}"
+				when 'all' then "-a"
+				when 'message' then "-m=#{_.str.quote(v)}"
 				else ''
 	.filter _.identity
