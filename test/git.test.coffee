@@ -27,7 +27,8 @@ describe 'git object', ->
 				'commit', 'config',
 				'diff', 'init', 'log',
 				'pull', 'push',
-				'status', 'show'
+				'status', 'show',
+				'revert', 'tag', 'help'
 			].forEach (cmd) ->
 				git.should.have.property(cmd)
 				git[cmd].should.be.instanceof(Function)

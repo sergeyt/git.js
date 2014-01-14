@@ -18,6 +18,6 @@ transform = (opts) ->
 				# do not create a commit, but show a list of paths that are to be committed.
 				when 'dryrun' then "--dry-run"
 				when 'all' then "-a"
-				when 'message' then "--message=#{_.str.quote(v, '\'')}"
+				when 'message' then "-m #{_.str.quote(v, '\'')}"
 				else ''
 	.filter _.identity
