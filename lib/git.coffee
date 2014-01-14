@@ -2,8 +2,6 @@ fs = require 'fs'
 path = require 'path'
 exeq = require 'exequte'
 
-verbose = false
-
 # load command plugins
 plugins = fs.readdirSync(__dirname)
 	.filter (file) ->
@@ -18,19 +16,21 @@ plugins = fs.readdirSync(__dirname)
 		return factory
 
 # executes given git command
-exec = (cwd, cmd, args) ->
+exec = (cwd, cmd, args, opts) ->
 	args = [] if not args
 	argv = [cmd, args...]
-	exeq 'git', argv, {cwd: cwd, verbose: verbose}
+	exeq 'git', argv, {cwd: cwd, verbose: opts.verbose}
 
 # creates git command runner
-git = (dir) ->
+git = (dir, opts) ->
 	if not fs.existsSync dir
 		throw new Error "#{dir} does not exist"
 
+	opts = {} if not opts
+
 	# runs given command
 	run = (cmd, args) ->
-		exec dir, cmd, args
+		exec dir, cmd, args, opts
 
 	api = {run: run}
 
