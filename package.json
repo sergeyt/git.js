@@ -1,6 +1,6 @@
 {
   "name": "git.js",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Simple api to run git commands from nodejs",
   "author": "Sergey Todyshev <stodyshev@gmail.com>",
   "main": "index.js",
