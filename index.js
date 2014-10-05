@@ -1,2 +1,2 @@
 require('coffee-script');
-module.exports = require('./lib/git');
+module.exports = require('./src/git');
