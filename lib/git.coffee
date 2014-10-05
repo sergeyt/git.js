@@ -1,6 +1,7 @@
 fs = require 'fs'
 path = require 'path'
 exeq = require 'exequte'
+_ = require 'underscore'
 
 # load command plugins
 plugins = fs.readdirSync(__dirname)
@@ -23,6 +24,16 @@ exec = (cwd, cmd, args, opts) ->
 
 # creates git command runner
 git = (dir, opts) ->
+	unless arguments.length
+		dir = process.cwd()
+		opts = {}
+
+	if _.isObject dir
+		opts = dir
+		dir = opts.dir
+
+	dir = process.cwd() unless dir
+
 	unless fs.existsSync dir
 		throw new Error "#{dir} does not exist"
 

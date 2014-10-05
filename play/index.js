@@ -1,2 +1,4 @@
 // export local git for manual tests
-module.exports = require('../index')(__dirname + '/..');
+path = require('path')
+dir = path.join(__dirname, '..')
+module.exports = require('../index')(dir)
