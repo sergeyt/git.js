@@ -6,9 +6,9 @@ print = (p) ->
 	.fail (err) ->
 		console.error err
 
-print git.config.get 'user.name'
-print git.config.get 'user.email'
-print git.config.global.get 'user.name'
-print git.config.global.get 'user.email'
-print git.config.system.get 'user.name'
-print git.config.system.get 'user.email'
+print git.config.user.name
+print git.config.user.email
+print git.config.global.user.name
+print git.config.global.user.email
+print git.config.system.user.name
+print git.config.system.user.email
