@@ -8,7 +8,7 @@ module.exports = (git) ->
 		git.run('push', args).then(parse)
 
 transform = (opts) ->
-	return [] if not opts
+	return [] unless opts
 	# todo support more options
 	_.keys(opts)
 	.map (k) ->
@@ -20,7 +20,7 @@ transform = (opts) ->
 	.filter _.identity
 
 parse = (out) ->
-	return [] if not out
+	return [] unless out
 	lines = _.str.lines(out)
 	# todo parse refs
 	lines

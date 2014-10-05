@@ -5,7 +5,7 @@ module.exports = (git) ->
 		git.run('gc', args)
 
 transform = (opts) ->
-	return [] if not opts
+	return [] unless opts
 	# todo support more options
 	_.keys(opts)
 	.map (k) ->

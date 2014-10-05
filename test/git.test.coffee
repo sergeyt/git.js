@@ -4,7 +4,7 @@ path = require 'path'
 tmp = path.join __dirname, 'tmp'
 
 create = ->
-	fs.mkdirSync tmp if not fs.existsSync tmp
+	fs.mkdirSync tmp unless fs.existsSync tmp
 	require('../index')(tmp)
 
 clean = ->

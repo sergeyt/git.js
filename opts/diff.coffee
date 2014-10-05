@@ -1,6 +1,6 @@
 # common diff options
 module.exports = (opts) ->
-	return [] if not opts
+	return [] unless opts
 	# todo support more options
 	_.keys(opts)
 	.map (k) ->

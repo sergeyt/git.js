@@ -3,7 +3,7 @@ parse = require '../parse/status'
 # status command plugin
 module.exports = (git) ->
 	return (opts) ->
-		opts = {} if not opts
+		opts = {} unless opts
 		args = if opts.full then [] else ['-s']
 		git.run('status', args).then(parseFn(opts))
 

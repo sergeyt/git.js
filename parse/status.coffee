@@ -3,7 +3,7 @@ _.str = require 'underscore.string'
 
 # parser of output in short format
 parseShort = (out) ->
-	return [] if not out
+	return [] unless out
 	lines = _.str.lines out
 	lines.map (l) ->
 		status = l.substr(0, 2)
@@ -27,7 +27,7 @@ fullStatus = (s) ->
 
 # normal output parser
 parseFull = (out) ->
-	return [] if not out
+	return [] unless out
 
 	lines = _.str.lines out
 	lines = lines.map (l) ->

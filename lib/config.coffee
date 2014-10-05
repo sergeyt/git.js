@@ -15,7 +15,7 @@ module.exports = (git) ->
 
 # creates config api
 create = (git, ctx) ->
-	ctx = [] if not ctx
+	ctx = [] unless ctx
 	get = (name) ->
 		args = [ctx..., name]
 		git.run('config', args)

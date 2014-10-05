@@ -16,7 +16,7 @@ module.exports = (git) ->
 	# diff files
 	cmd.files = (files, opts) ->
 		# todo support more options
-		files = [] if not files
+		files = [] unless files
 		# using unified diff format
 		args = ['-u', diff_opts(opts)...]
 		git.run('diff-files', [args..., files...]).then(parse)

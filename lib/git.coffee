@@ -17,16 +17,16 @@ plugins = fs.readdirSync(__dirname)
 
 # executes given git command
 exec = (cwd, cmd, args, opts) ->
-	args = [] if not args
+	args = [] unless args
 	argv = [cmd, args...]
 	exeq 'git', argv, {cwd: cwd, verbose: opts.verbose}
 
 # creates git command runner
 git = (dir, opts) ->
-	if not fs.existsSync dir
+	unless fs.existsSync dir
 		throw new Error "#{dir} does not exist"
 
-	opts = {} if not opts
+	opts = {} unless opts
 
 	# runs given command
 	run = (cmd, args) ->

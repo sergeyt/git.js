@@ -5,7 +5,7 @@ module.exports = (git) ->
 		git.run('help', args)
 
 transform = (opts) ->
-	return [] if not opts
+	return [] unless opts
 	_.keys(opts)
 	.map (k) ->
 			v = opts[k]

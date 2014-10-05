@@ -7,7 +7,7 @@ module.exports = (git) ->
 	cmd
 
 transform = (opts) ->
-	return [] if not opts
+	return [] unless opts
 	# todo support more options
 	_.keys(opts)
 	.map (k) ->

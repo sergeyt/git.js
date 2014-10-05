@@ -8,7 +8,7 @@ module.exports = (git) ->
 
 	# adds given tag
 	cmd.add = (tag, opts) ->
-		opts = {} if not opts
+		opts = {} unless opts
 		how = '-a'
 		how = '-s' if opts.signed
 		how = "-u #{opts.key}" if opts.key
@@ -31,7 +31,7 @@ module.exports = (git) ->
 	cmd
 
 transform = (opts) ->
-	return [] if not opts
+	return [] unless opts
 	# todo support more options
 	_.keys(opts)
 	.map (k) ->

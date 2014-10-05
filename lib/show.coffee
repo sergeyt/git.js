@@ -12,7 +12,7 @@ module.exports = (git) ->
 	show
 
 show_opts = (opts) ->
-	return [] if not opts
+	return [] unless opts
 	# todo support more options
 	_.keys(opts)
 	.map (k) ->
