@@ -1,3 +1,5 @@
+_ = require 'underscore'
+
 # remove command plugin
 module.exports = (git) ->
 	cmd = (files, opts) ->

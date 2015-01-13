@@ -1,3 +1,5 @@
+_ = require 'underscore'
+
 # common diff options
 module.exports = (opts) ->
 	return [] unless opts

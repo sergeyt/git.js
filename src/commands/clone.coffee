@@ -1,3 +1,5 @@
+_ = require 'underscore'
+
 # clone command plugin
 module.exports = (git) ->
 	return (url, directory, opts) ->

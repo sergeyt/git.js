@@ -1,3 +1,4 @@
+_ = require 'underscore'
 parse = require '../../parse/status'
 
 # status command plugin

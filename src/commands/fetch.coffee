@@ -1,3 +1,5 @@
+_ = require 'underscore'
+
 # fetch command plugin
 module.exports = (git) ->
 	return (repository, opts) ->

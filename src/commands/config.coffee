@@ -1,3 +1,5 @@
+_ = require 'underscore'
+
 # config command plugin
 module.exports = (git) ->
 	# todo support more options

@@ -1,3 +1,4 @@
+_ = require 'underscore'
 parse = require 'parse-diff'
 Q = require 'q'
 diff_opts = require '../../opts/diff'

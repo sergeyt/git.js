@@ -1,3 +1,5 @@
+_ = require 'underscore'
+
 # gc command plugin
 module.exports = (git) ->
 	return (opts) ->
